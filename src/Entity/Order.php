@@ -16,9 +16,6 @@ class Order
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $user_id;
-
     #[ORM\Column(type: 'string', length: 255)]
     private $customerName;
 
@@ -43,6 +40,9 @@ class Order
     #[ORM\OneToMany(mappedBy: 'ordering', targetEntity: OrderItem::class)]
     private $orderItems;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'orders')]
+    private $user;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -51,18 +51,6 @@ class Order
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
     }
 
     public function getCustomerName(): ?string
@@ -175,6 +163,18 @@ class Order
                 $orderItem->setOrdering(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
