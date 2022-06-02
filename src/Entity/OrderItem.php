@@ -14,59 +14,17 @@ class OrderItem
     private $id;
 
     #[ORM\Column(type: 'integer')]
-    private $product_id;
-
-    #[ORM\Column(type: 'integer')]
-    private $order_id;
-
-    #[ORM\Column(type: 'integer')]
-    private $price;
-
-    #[ORM\Column(type: 'integer')]
     private $qty;
 
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderItems')]
     private $ordering;
 
+    #[ORM\OneToOne(targetEntity: Products::class, cascade: ['persist', 'remove'])]
+    private $product;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getProductId(): ?int
-    {
-        return $this->product_id;
-    }
-
-    public function setProductId(int $product_id): self
-    {
-        $this->product_id = $product_id;
-
-        return $this;
-    }
-
-    public function getOrderId(): ?int
-    {
-        return $this->order_id;
-    }
-
-    public function setOrderId(int $order_id): self
-    {
-        $this->order_id = $order_id;
-
-        return $this;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
-
-        return $this;
     }
 
     public function getQty(): ?int
@@ -89,6 +47,18 @@ class OrderItem
     public function setOrdering(?Order $ordering): self
     {
         $this->ordering = $ordering;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Products
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Products $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }
