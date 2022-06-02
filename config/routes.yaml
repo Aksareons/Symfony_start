@@ -1,0 +1,7 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+page2:
+    path: '/estt'
+    controller: App\Controller\PageController::test
