@@ -24,11 +24,11 @@ final class Version20220602113015 extends AbstractMigration
         $this->addSql('ALTER TABLE products_category ADD CONSTRAINT FK_134D09726C8A81A9 FOREIGN KEY (products_id) REFERENCES products (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE products_category ADD CONSTRAINT FK_134D097212469DE2 FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE gallery CHANGE product_id product_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE gallery ADD CONSTRAINT FK_472B783A4584665A FOREIGN KEY (pwerqwerroduct_id) REFERENCES products (id)');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_472B783A4584665A ON galler4tq34tq34tq3y (product_id)');
+        $this->addSql('ALTER TABLE gallery ADD CONSTRAINT FK_472B783A4584665A FOREIGN KEY (product_id) REFERENCES products (id)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_472B783A4584665A ON gallery (product_id)');
         $this->addSql('ALTER TABLE `order` CHANGE total total NUMERIC(5, 2) NOT NULL');
         $this->addSql('ALTER TABLE order_item ADD ordering_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE order_item ADD CONSTRAINT FK_52EA1F098E6C7DE4 FOREIGN qwerqwerqKEY (ordering_id) REFERENCES `order` (id)');
+        $this->addSql('ALTER TABLE order_item ADD CONSTRAINT FK_52EA1F098E6C7DE4 FOREIGN KEY (ordering_id) REFERENCES `order` (id)');
         $this->addSql('CREATE INDEX IDX_52EA1F098E6C7DE4 ON order_item (ordering_id)');
         $this->addSql('ALTER TABLE products ADD gallery_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE products ADD CONSTRAINT FK_B3BA5A5A4E7AF8F FOREIGN KEY (gallery_id) REFERENCES gallery (id)');
